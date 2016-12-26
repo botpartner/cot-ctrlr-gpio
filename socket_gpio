@@ -1,0 +1,22 @@
+#!/bin/sh
+# /etc/init.d/socket_gpio
+
+case "$1" in
+  start)
+    echo "Starting socket_gpio"
+    # run application you want to start
+    python /usr/local/sbin/socket_gpio.pyc &
+    ;;
+  stop)
+    echo "Stopping example"
+    # kill application you want to stop
+    # killall python
+    kill -SIGKILL $(ps aux | grep 'socket_daemon.py' | grep -v 'grep'| awk '{print $2}')
+    ;;
+  *)
+    echo "Usage: /etc/init.d/socket_gpio {start|stop}"
+    exit 1
+    ;;
+esac
+
+exit 0
